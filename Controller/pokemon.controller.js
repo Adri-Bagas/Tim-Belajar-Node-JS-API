@@ -27,10 +27,35 @@ exports.create = async function (conn, req, res) {
     res.end()
 }
 
-exports.update = function (req, res) {
-    // Bikin Sendiri!
+exports.update = async function (conn, req, res) {
+    let [data, err] = await parseBody(req)
+    console.log(data);
+    if (err) throw err;
+    
+    err = await Pokemon.update(conn, data.id, data.name, data.element, data.img);
+    if (err) throw err;
+
+    res.writeHead(200, {"Content-Type": "application/json"})
+    res.write(JSON.stringify({
+        msg: `Success update pokemon with id: ${data.id}!`,
+        status: 200,
+        success: true
+    }))
+    res.end()
 }
 
-exports.destroy = function (req, res) {
-    // Bikin Sendiri!
+exports.destroy = async function (conn, req, res) {
+    let [data, err] = await parseBody(req)
+    if (err) throw err;
+    
+    err = await Pokemon.delete(conn, data.id);
+    if (err) throw err;
+
+    res.writeHead(200, {"Content-Type": "application/json"})
+    res.write(JSON.stringify({
+        msg: `Success delete pokemon with id: ${data.id}!`,
+        status: 200,
+        success: true
+    }))
+    res.end()
 }
