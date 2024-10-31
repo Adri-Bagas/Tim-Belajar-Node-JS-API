@@ -1,0 +1,15 @@
+{
+  "name": "belajar_node_api",
+  "version": "1.0.0",
+  "description": "Belajar membuat API sederhana menggunakan NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Farras",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mysql": "^2.18.1"
+  }
+}
